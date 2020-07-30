@@ -1,7 +1,7 @@
 package PooAndInheritance
 
 fun main(args: Array<String>) {
-    // Creando un array de tipo PooAndInheritance.Animal()
+    // Creando un array de tipo Animal()
     val animals = arrayOf(Hippo(), Wolf())
     for (item in animals) {
         item.roam()
@@ -32,11 +32,11 @@ open class Animal {
     }
 
     open fun roam() {
-        println("The PooAndInheritance.Animal is roaming")
+        println("The Animal is roaming")
     }
 
     fun sleep() {
-        println("The PooAndInheritance.Animal is sleeping")
+        println("The Animal is sleeping")
     }
 }
 

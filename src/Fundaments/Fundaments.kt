@@ -47,6 +47,10 @@ fun main (args: Array<String>) {
 
     // Usando loop FOR
     playingWithFor()
+
+    // Usando When
+    val diaSemana = getDay(3)
+    println("Dia de la semana: $diaSemana")
 }
 
 /* Functions */
@@ -89,4 +93,19 @@ fun playingWithFor() {
     for ((indice, item) in friends.withIndex()) {
         println("$item esta en la posicion: $indice")
     }
+}
+
+fun getDay(numDay: Int) : String {
+    val day: String
+    // When as a switch, evaluacion multiple.
+    when (numDay) {
+        1 -> day = "Lunes"
+        2 -> day = "Martes"
+        3 -> day = "Miercoles"
+        4 -> day = "Jueves"
+        5 -> day = "Viernes"
+        6, 7 -> day = "Fin de semana"
+        else -> day = "No existe este dia"
+    }
+    return day
 }
