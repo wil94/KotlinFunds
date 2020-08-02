@@ -33,8 +33,6 @@ fun fizzBuzzing(x: Int): String {
     else return "$x"
 }
 
-
-
 // Funcion que Analiza si dos palabras hacen un anagrama
 fun isAnagram(parOne: String, parTwo: String) : Boolean {
     var wordOne = parOne.trim().toUpperCase()
@@ -85,6 +83,7 @@ fun wordPalindrome(word: String) : Boolean {
         return (word == wordReversed)
     } else return true
 }
+
 
 fun isCorrectSintax(str: String) : Boolean {
     val openBraces = arrayOf("[", "{", "(")
