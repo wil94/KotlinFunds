@@ -1,28 +1,35 @@
 fun main(args: Array<String>) {
-    /* Exercise FizzBuzz
+    /*
+    // Exercise FizzBuzz
     for (x in 1..20) {
         println(fizzBuzzing(x))
     }
     */
 
-    /* Exercise Anagrams
+    /*
+    // Exercise Anagrams
     val wordOne = "dairy"
     val wordTwo = "diary"
     println("Los textos $wordOne y $wordTwo son anagramas?: ${isAnagram(wordOne, wordTwo)}")
     */
 
-    /* Exercise Count Vowels
+    /*
+    // Exercise Count Vowels
     val contarVocales = "Murcielago"
     println("La palabra $contarVocales tiene ${countVowels(contarVocales)} vocales")
     */
 
-    /* Exercise word palindrome
+    /*
+    // Exercise word palindrome
     val wordPalindrome = ""
     println("La palabra $wordPalindrome es palindroma: ${wordPalindrome(wordPalindrome)}")
     */
 
-    val sintaxisCorrecta = "{[(M)]}"
+    /*
+    // Exercise sintax validate
+    val sintaxisCorrecta = "{[(M)(N)O]}[(Y)]"
     println("La sintaxis  $sintaxisCorrecta  es correcta?: ${isCorrectSintax(sintaxisCorrecta)}")
+    */
 }
 
 // Funcion que muestra Fizz si es divisible entre 3 o Buzz si es entre 5...
@@ -85,49 +92,41 @@ fun wordPalindrome(word: String) : Boolean {
 }
 
 
-fun isCorrectSintax(str: String) : Boolean {
-    val openBraces = arrayOf("[", "{", "(")
-    val closeBraces = arrayOf("]", "}", ")")
-    var flag = true
+fun isCorrectSintax(validationText: String) : Boolean {
+    val openersBrace = arrayOf("{", "[", "(")
+    val closersBrace = arrayOf("}", "]", ")")
+    val arrWord = validationText.trim().split("")
 
-    val sptStr = str.trim().split("")
+    var lastOpener = ""
+    var nextCloser = ""
+    val braceOpened = ArrayList<String>()
+
     var i = 1
-    var lastOpen = ""
-    var nextClose = ""
-    var storeOpenBraces = mutableListOf("String()")
-    storeOpenBraces.add("SSSS")
-    storeOpenBraces.add("RRRRRR")
-
-    val ss = object {
-        var sss: String = ""
-    }
-
-
-//    storeOpenBraces.plus("S")
-//    storeOpenBraces.plus("w")
-    println(storeOpenBraces[0])
-    //println(storeOpenBraces[1])
-    //println(storeOpenBraces[2])
-
-
-    while (i < sptStr.size - 1) {
-
-
-        if (sptStr[i] in openBraces) {
-            lastOpen = sptStr[i]
-            nextClose  = handleBraces(lastOpen)
+    while (i < arrWord.size - 1) {
+        // println("Item: ${arrWord[i]} | opener: $lastOpener | closer: $nextCloser SIZEARRAY: ${braceOpened.size}")
+        if (arrWord[i] in openersBrace) {
+            lastOpener = arrWord[i]
+            nextCloser = getCloser(lastOpener)
+            braceOpened.add(lastOpener)
+        } else if (arrWord[i] in closersBrace) {
+            if (arrWord[i] != nextCloser) return false
+            else {
+                if (braceOpened.size > 0) braceOpened.removeAt(braceOpened.size - 1)
+                if (braceOpened.size > 0) lastOpener = braceOpened[braceOpened.size - 1]
+                nextCloser = getCloser(lastOpener)
+            }
+        } else {
+            println(arrWord[i])
         }
-        println(sptStr[i] + " - " + lastOpen + " - " + nextClose)
-        if (sptStr[i] in closeBraces && sptStr[i] != nextClose) return false
         i++
     }
-    return true
+    return !(braceOpened.size > 0)
 }
 
-fun handleBraces(b: String) : String {
-    var ret = ""
-    if (b.equals("(")) ret = ")"
-    if (b == "[") ret = "]"
-    if (b == "{") ret = "}"
-    return ret
+fun getCloser(b: String) : String {
+    var closer = ""
+    if (b == "(") closer = ")"
+    if (b == "[") closer = "]"
+    if (b == "{") closer = "}"
+    return closer
 }
