@@ -40,6 +40,11 @@ fun main(args: Array<String>) {
     // val esVegetariano = r1.isVegetarian ...
     println("title is $titulo and vegetarian is $esVegetariano")
 
+    // Destructurando un array<Object> con for
+    val recipes = arrayOf(r1, r2 ,r3)
+    // Destructuracion en orden, por las propiedades del objeto
+    for ((titulo, principalIngredient) in recipes) println("title: $titulo ingrediente: $principalIngredient")
+
     // Creamos tres variables con referencia al mismo Objeto
     val r5 = Recipe("Sushi", "Fish")
     val r6 = r5
